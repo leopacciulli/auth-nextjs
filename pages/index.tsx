@@ -1,15 +1,20 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { AuthContext } from '../styles/contexts/AuthContext'
 import styles from '../styles/Home.module.css'
 
 const Home = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = () => {
+  const { signIn, isAuthenticated } = useContext(AuthContext);
+
+  const handleSubmit = async () => {
     const data = {
       email,
       password
     }
+
+    await signIn(data)
   }
 
   return (
