@@ -1,6 +1,9 @@
+import { GetServerSideProps } from 'next'
 import { useContext, useState } from 'react'
-import { AuthContext } from '../styles/contexts/AuthContext'
+import { AuthContext } from '../contexts/AuthContext'
+import { parseCookies } from 'nookies'
 import styles from '../styles/Home.module.css'
+import { withSSRGuest } from '../utils/withSSRGuest'
 
 const Home = () => {
   const [email, setEmail] = useState('')
@@ -41,3 +44,9 @@ const Home = () => {
 }
 
 export default Home
+
+export const getServerSideProps = withSSRGuest(async (context) => {
+  return {
+    props: {}
+  }
+})
