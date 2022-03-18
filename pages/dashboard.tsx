@@ -3,6 +3,7 @@ import { api } from "../services/apiClient"
 import { AuthContext } from "../contexts/AuthContext"
 import { withSSRAuth } from "../utils/withSSRAuth"
 import { setupApiClient } from "../services/api"
+import Can from "../components/Can"
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext)
@@ -14,7 +15,13 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <h1>Dashboard: {user?.email}</h1>
+    <>
+      <h1>Dashboard: {user?.email}</h1>
+
+      <Can permissions={ ['metrics.list'] }>
+        <div>Métricas</div>
+      </Can>
+    </>
   )
 }
 
